@@ -1,0 +1,21 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: # your password
+      MYSQL_DATABASE: librarymanagement
+    networks:
+      - mynetwork
+
+  web:
+    build: .
+    ports:
+      - 8000:8000
+    networks:
+      - mynetwork
+    command: ["/app/entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+networks:
+  mynetwork:
+    driver: bridge
