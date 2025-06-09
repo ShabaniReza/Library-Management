@@ -10,5 +10,6 @@ router.register('members', views.MemberViewSet)
 
 extention_router = routers.NestedDefaultRouter(router, 'members', lookup='member')
 extention_router.register('extentions', views.ExtentionViewSet, basename='member-extentions')
+extention_router.register('images', views.MemberImageViewSet, basename='member-images')
 
 urlpatterns = router.urls + extention_router.urls

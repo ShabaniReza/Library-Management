@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField, DateField, CharField, PrimaryKeyRelatedField, HyperlinkedRelatedField
-from .models import Book, Member, BorrowRecord, Author, Genre
+from .models import Book, Member, BorrowRecord, Author, Genre, MemberImage
 
 class AuthorSerializer(ModelSerializer):
     class Meta:
@@ -42,12 +42,22 @@ class ProfileSerializer(ModelSerializer):
 
     def get_username(self, obj):
         return obj.user.username
+    
+
+class MemberImageSerializer(ModelSerializer):
+    def create(self, validated_data):
+        member_id = self.context['member_id']
+        return MemberImage.objects.create(member_id=member_id, **validated_data)
+    class Meta:
+        model = MemberImage
+        fields = ['id', 'image']
 
 class MemberSerializer(ModelSerializer):
     borrowed_books = SerializerMethodField()
+    images = MemberImageSerializer(many=True, read_only=True)
     class Meta:
         model = Member
-        fields = ['national_code', 'first_name', 'last_name', 'address', 'phone_number', 'email', 'date_joined', 'borrowed_books']
+        fields = ['national_code', 'first_name', 'last_name', 'address', 'phone_number', 'email', 'date_joined', 'borrowed_books', 'images']
 
     def get_borrowed_books(self, obj):
         borrowed_books_list = [

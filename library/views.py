@@ -5,8 +5,8 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
-from .serializers import GenreSerializer, AuthorSerializer, CreateBookSerializer, SimpleBookSerializer, MemberSerializer, BorrowRecordSerializer, UpdateBorrowRecordSerializer, ProfileSerializer, UpdateMemberSerializer
-from .models import Book, Member, BorrowRecord, Author, Genre
+from .serializers import MemberImageSerializer, GenreSerializer, AuthorSerializer, CreateBookSerializer, SimpleBookSerializer, MemberSerializer, BorrowRecordSerializer, UpdateBorrowRecordSerializer, ProfileSerializer, UpdateMemberSerializer
+from .models import Book, Member, BorrowRecord, Author, Genre, MemberImage
 from .pagination import DefaultPagination
 from .filters import AuthorFilter
 
@@ -78,6 +78,15 @@ class MemberViewSet(ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+class MemberImageViewSet(ModelViewSet):
+    serializer_class = MemberImageSerializer
+
+    def get_serializer_context(self):
+        return {'member_id': self.kwargs['member_pk']}
+
+    def get_queryset(self):
+        return MemberImage.objects.filter(member__pk=self.kwargs['member_pk'])
 
 class ExtentionViewSet(ModelViewSet):
     permission_classes = [IsAdminUser]

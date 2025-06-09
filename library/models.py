@@ -64,6 +64,10 @@ class Member(models.Model):
     class Meta:
         ordering = ['first_name', 'last_name']
 
+class MemberImage(models.Model):
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='library/media')
+
 class BorrowRecord(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
