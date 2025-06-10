@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.core.validators import RegexValidator
+from .validators import validate_file_size
 
 
 class Author(models.Model):
@@ -66,7 +67,9 @@ class Member(models.Model):
 
 class MemberImage(models.Model):
     member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='library/media')
+    image = models.ImageField(
+        upload_to='library/media',
+        validators=[validate_file_size])
 
 class BorrowRecord(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
