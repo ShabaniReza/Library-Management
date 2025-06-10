@@ -1,5 +1,6 @@
+from django.utils.html import format_html
 from django.contrib import admin, messages
-from .models import Author, Genre, Member, BorrowRecord, Book
+from .models import Author, Genre, Member, BorrowRecord, Book, MemberImage
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
@@ -52,6 +53,15 @@ class BookAdmin(admin.ModelAdmin):
         }],
     ]
 
+class MemberImageInline(admin.TabularInline):
+    model = MemberImage
+    readonly_fields = ['thumbnail']
+
+    def thumbnail(self, instance):
+        if instance.image.name != '':
+            return format_html(f'<img src="{instance.image.url}" class="thumbnail" />')
+        return ''
+
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     #! list page
@@ -63,6 +73,7 @@ class MemberAdmin(admin.ModelAdmin):
     search_fields = ['user__username__istartswith', 'first_name__istartswith', 'last_name__istartswith', 'national_code__startswith', 'phone_number__startswith', 'email__istartswith']
 
     #! form page
+    inlines = [MemberImageInline]
     autocomplete_fields = ['user']
     readonly_fields = ['date_joined']
     fieldsets =[
@@ -83,6 +94,11 @@ class MemberAdmin(admin.ModelAdmin):
             'description': 'کاربر'
         }]
     ]
+
+    class Media:
+        css = {
+            'all': ['library/styles.css']
+        }
 
 @admin.register(BorrowRecord)
 class BorrowRecordAdmin(admin.ModelAdmin):

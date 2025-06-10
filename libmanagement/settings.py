@@ -32,7 +32,7 @@ if not SECRET_KEY:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 X_FRAME_OPTIONS = 'DENY'
 
@@ -96,9 +96,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'librarymanagement',
-        'HOST': 'mysql',
+        'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'your password',
+        'PASSWORD': 'Reza271379',
         'PORT': '3306'
     }
 }
