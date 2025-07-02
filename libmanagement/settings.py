@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'rest_framework',
+    'django_rest_passwordreset',
     'djoser',
     'library',
     'users',
@@ -168,4 +169,22 @@ DJOSER = {
         'user_create': 'users.userserializers.UserCreateSerializer',
         'current_user': 'users.userserializers.UserSerializer',
     },
+}
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp4dev'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 2525
+DEFAULT_FROM_EMAIL = 'from@domain.com'
+EMAIL_TITLE = 'Central Library'
+
+
+DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 24
+DJANGO_REST_PASSWORDRESET_NO_INFORMATION_LEAKAGE = False
+DJANGO_REST_MULTITOKENAUTH_REQUIRE_USABLE_PASSWORD = True
+DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
+    "CLASS": "django_rest_passwordreset.tokens.RandomStringTokenGenerator"
 }
