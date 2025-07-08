@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django_rest_passwordreset',
     'djoser',
     'library',
+    'emails',
     'users',
 ]
 
@@ -97,9 +98,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'librarymanagement',
-        'HOST': 'localhost',
+        'HOST': 'mysql',
         'USER': 'root',
-        'PASSWORD': 'Reza271379',
+        'PASSWORD': 'your password',
         'PORT': '3306'
     }
 }
@@ -177,7 +178,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp4dev'
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 2525
+EMAIL_PORT = 25
 DEFAULT_FROM_EMAIL = 'from@domain.com'
 EMAIL_TITLE = 'Central Library'
 
