@@ -8,8 +8,8 @@ router.register('genres', views.GenreViewSet)
 router.register('books', views.BookViewSet)
 router.register('members', views.MemberViewSet)
 
-extention_router = routers.NestedDefaultRouter(router, 'members', lookup='member')
-extention_router.register('extentions', views.ExtentionViewSet, basename='member-extentions')
-extention_router.register('images', views.MemberImageViewSet, basename='member-images')
+members_router = routers.NestedDefaultRouter(router, 'members', lookup='member')
+members_router.register('extentions', views.ExtentionViewSet, basename='member-extentions')
+members_router.register('images', views.MemberImageViewSet, basename='member-images')
 
-urlpatterns = router.urls + extention_router.urls
+urlpatterns = router.urls + members_router.urls
