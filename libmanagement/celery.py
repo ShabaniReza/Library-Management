@@ -1,9 +1,9 @@
 import os
 from celery import Celery
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'librarymanagement.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'libmanagement.settings')
 
-celery = Celery('librarymanagement')
+celery = Celery('libmanagement')
 
 celery.config_from_object('django.conf:settings', namespace='CELERY')
 celery.autodiscover_tasks()

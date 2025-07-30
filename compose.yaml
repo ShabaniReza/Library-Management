@@ -10,6 +10,7 @@ services:
 
   web:
     build: .
+    container_name: librarymanagement
     ports:
       - 8000:8000
     networks:
@@ -35,7 +36,8 @@ services:
 
   worker:
     build: .
-    command: celery -A librarymanagement --loglevel=info
+    container_name: worker
+    command: celery -A libmanagement worker --loglevel=info
     networks:
       - mynetwork
 
