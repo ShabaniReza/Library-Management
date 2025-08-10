@@ -23,6 +23,7 @@ admin.site.site_header = 'Library Management'
 admin.site.index_title = 'Admin page'
 
 urlpatterns = [
+    path('', include('core.urls')),
     path('admin/', admin.site.urls),
     path('library/', include('library.urls')),
     path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
