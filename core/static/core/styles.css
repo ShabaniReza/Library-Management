@@ -1,0 +1,12 @@
+body {
+    text-align: center;
+    background-color: #560036;
+    margin: 0;
+}
+.text {
+    font-size: 50px;
+    color: #a9ffc9;
+}
+.coding {
+    width: 30%;
+}
