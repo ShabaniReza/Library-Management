@@ -25,6 +25,13 @@ class TestCreateAuthor:
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
 
+    def test_if_user_is_admin_returns_201(self, authenticate, create_author):
+        authenticate(True)
+
+        response = create_author({'first_name': 'a'})
+
+        assert response.status_code == status.HTTP_201_CREATED
+
 
 @pytest.mark.django_db
 class TestRetrieveAuthor:
