@@ -28,7 +28,7 @@ class TestCreateAuthor:
     def test_if_user_is_admin_returns_201(self, authenticate, create_author):
         authenticate(True)
 
-        response = create_author({'first_name': 'a'})
+        response = create_author({'first_name': 'a', 'last_name': 'b'})
 
         assert response.status_code == status.HTTP_201_CREATED
 
