@@ -7,15 +7,31 @@ services:
       MYSQL_DATABASE: librarymanagement
     networks:
       - mynetwork
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 1m
+      timeout: 1m
+      retries: 5
+      start_period: 1m
 
   web:
     build: .
-    container_name: librarymanagement
+    container_name: web
     ports:
       - 8000:8000
     networks:
       - mynetwork
     command: ["/app/entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 5
+      start_period: 2m
 
   smtp4dev:
     image: rnwood/smtp4dev:latest
@@ -40,6 +56,35 @@ services:
     command: celery -A libmanagement worker --loglevel=info
     networks:
       - mynetwork
+    depends_on:
+      web:
+        condition: service_healthy
+        restart: true
+      db:
+        condition: service_healthy
+        restart: true
+
+  pytest:
+    build: .
+    container_name: pytest
+    command: pytest library/tests/test_authors.py
+    networks:
+      - mynetwork
+    depends_on:
+      web:
+        condition: service_healthy
+        restart: true
+
+  locust:
+    build: .
+    container_name: locust
+    command: locust -f locustfiles/locust_authors.py
+    ports:
+      - '8089:8089'
+    depends_on:
+      web:
+        condition: service_healthy
+        restart: true
 
 networks:
   mynetwork:
