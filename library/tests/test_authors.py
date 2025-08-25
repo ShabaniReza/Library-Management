@@ -65,3 +65,13 @@ class TestRetrieveAuthor:
         response = api_client.get(f'/library/authors/{id}/')
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
+@pytest.mark.django_db
+class TestListAuthor:
+    def test_if_authors_exists_returns_200(self, api_client):
+        authors = baker.make(Author, _quantity=5)
+
+        response = api_client.get(f'/library/authors/')
+
+        assert response.status_code == status.HTTP_200_OK
