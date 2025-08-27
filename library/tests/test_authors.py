@@ -80,3 +80,12 @@ class TestListAuthor:
         response = api_client.get(f'/library/authors/')
 
         assert response.status_code == status.HTTP_200_OK
+
+@pytest.mark.django_db
+class TestPatchAuthor:
+    def test_if_user_is_anonymous_returns_401(self, patch_author):
+        author = baker.make(Author)
+
+        response = patch_author({'first_name': 'a'}, author.id)
+
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
