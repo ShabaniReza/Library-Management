@@ -10,6 +10,11 @@ def create_author(api_client):
         return api_client.post('/library/authors/', author_information)
     return do_create_author
 
+@pytest.fixture
+def patch_author(api_client):
+    def do_patch_author(author_information, author_id):
+        return api_client.patch(f'/library/authors/{author_id}', author_information)
+    return do_patch_author
 
 @pytest.mark.django_db
 class TestCreateAuthor:
