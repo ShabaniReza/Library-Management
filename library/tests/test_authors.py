@@ -13,7 +13,7 @@ def create_author(api_client):
 @pytest.fixture
 def patch_author(api_client):
     def do_patch_author(author_information, author_id):
-        return api_client.patch(f'/library/authors/{author_id}', author_information)
+        return api_client.patch(f'/library/authors/{author_id}/', author_information)
     return do_patch_author
 
 @pytest.mark.django_db
