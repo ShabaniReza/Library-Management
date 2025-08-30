@@ -18,6 +18,12 @@ def patch_author(api_client):
         return api_client.patch(f'/library/authors/{author_id}/', author_information)
     return do_patch_author
 
+@pytest.fixture
+def put_author(api_client):
+    def do_put_author(author_information, author_id):
+        return api_client.put(f'/library/authors/{author_id}/', author_information)
+    return do_put_author
+
 # ! ____________________________Create____________________________
 
 @pytest.mark.django_db
