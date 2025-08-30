@@ -128,3 +128,22 @@ class TestPatchAuthor:
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data['first_name'] is not None
+
+# ! ____________________________Put____________________________
+
+@pytest.mark.django_db
+class TestPutAuthor:
+    def test_if_user_is_anonymous_returns_401(self, put_author):
+        author = baker.make(Author)
+
+        response = put_author(
+            {
+                'first_name': 'a',
+                'last_name': 'b',
+                'date_of_birth': 'c',
+                'date_of_death': 'd'
+            },
+            author.id
+        )
+
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
