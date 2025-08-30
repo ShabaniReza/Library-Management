@@ -4,6 +4,8 @@ from library.models import Author
 import pytest
 
 
+# ! Fixtures 
+
 @pytest.fixture
 def create_author(api_client):
     def do_create_author(author_information):
@@ -15,6 +17,8 @@ def patch_author(api_client):
     def do_patch_author(author_information, author_id):
         return api_client.patch(f'/library/authors/{author_id}/', author_information)
     return do_patch_author
+
+# ! ____________________________Create____________________________
 
 @pytest.mark.django_db
 class TestCreateAuthor:
@@ -46,6 +50,7 @@ class TestCreateAuthor:
         assert response.data['first_name'] is not None
         assert response.data['last_name'] is not None
 
+# ! ____________________________Retrieve____________________________
 
 @pytest.mark.django_db
 class TestRetrieveAuthor:
@@ -71,6 +76,7 @@ class TestRetrieveAuthor:
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
+# ! ____________________________List____________________________
 
 @pytest.mark.django_db
 class TestListAuthor:
@@ -80,6 +86,8 @@ class TestListAuthor:
         response = api_client.get(f'/library/authors/')
 
         assert response.status_code == status.HTTP_200_OK
+
+# ! ____________________________Patch____________________________
 
 @pytest.mark.django_db
 class TestPatchAuthor:
