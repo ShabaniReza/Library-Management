@@ -97,3 +97,11 @@ class TestPatchAuthor:
         response = patch_author({'first_name': 'a'}, author.id)
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_if_user_is_admin_returns_200(self, authenticate, patch_author):
+        author = baker.make(Author)
+        authenticate(True)
+
+        response = patch_author({'first_name': 'a'}, author.id)
+
+        assert response.status_code == status.HTTP_200_OK
