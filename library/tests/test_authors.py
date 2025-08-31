@@ -182,3 +182,22 @@ class TestPutAuthor:
         )
 
         assert response.status_code == status.HTTP_200_OK
+
+    def test_if_data_is_invalid_returns_400(self, authenticate, put_author):
+        author = baker.make(Author)
+        authenticate(True)
+
+        response = put_author(
+            {
+                'first_name': '',
+                'last_name': '',
+                'date_of_birth': '1111-11-11',
+                'date_of_death': '1111-11-11',
+                'biography': 'this is for testing!'
+            },
+            author.id
+        )
+
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.data['first_name'] is not None
+        assert response.data['last_name'] is not None
