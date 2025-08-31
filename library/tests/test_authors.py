@@ -207,3 +207,14 @@ class TestPutAuthor:
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data['first_name'] is not None
         assert response.data['last_name'] is not None
+
+# ! ____________________________Delete____________________________
+
+@pytest.mark.django_db
+class TestDeleteAuthor:
+    def test_if_user_is_anonymous_returns_401(self, delete_author):
+        author = baker.make(Author)
+
+        response = delete_author(author.id)
+
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
