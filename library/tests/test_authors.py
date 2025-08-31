@@ -140,8 +140,9 @@ class TestPutAuthor:
             {
                 'first_name': 'a',
                 'last_name': 'b',
-                'date_of_birth': 'c',
-                'date_of_death': 'd'
+                'date_of_birth': '1111-11-11',
+                'date_of_death': '1111-11-11',
+                'biography': 'this is for testing!'
             },
             author.id
         )
@@ -156,8 +157,9 @@ class TestPutAuthor:
             {
                 'first_name': 'a',
                 'last_name': 'b',
-                'date_of_birth': 'c',
-                'date_of_death': 'd'
+                'date_of_birth': '1111-11-11',
+                'date_of_death': '1111-11-11',
+                'biography': 'this is for testing!'
             },
             author.id
         )
