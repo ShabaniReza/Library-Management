@@ -163,3 +163,20 @@ class TestPutAuthor:
         )
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_if_user_is_admin_returns_200(self, authenticate, put_author):
+        author = baker.make(Author)
+        authenticate(True)
+
+        response = put_author(
+            {
+                'first_name': 'a',
+                'last_name': 'b',
+                'date_of_birth': '1111-11-11',
+                'date_of_death': '1111-11-11',
+                'biography': 'this is for testing!'
+            },
+            author.id
+        )
+
+        assert response.status_code == status.HTTP_200_OK
