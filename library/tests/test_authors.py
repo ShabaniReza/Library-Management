@@ -226,3 +226,11 @@ class TestDeleteAuthor:
         response = delete_author(author.id)
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_if_user_is_admin_returns_204(self, authenticate, delete_author):
+        author = baker.make(Author)
+        authenticate(True)
+
+        response = delete_author(author.id)
+
+        assert response.status_code == status.HTTP_204_NO_CONTENT
