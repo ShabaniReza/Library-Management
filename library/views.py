@@ -21,11 +21,11 @@ class AuthorViewSet(ModelViewSet):
     filterset_class = AuthorFilter
     search_fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death', 'biography']
 
-    @method_decorator(cache_page(60*5))
+    @method_decorator(cache_page(60))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
     
-    @method_decorator(cache_page(60*5))
+    @method_decorator(cache_page(60))
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
