@@ -24,6 +24,12 @@ def put_author(api_client):
         return api_client.put(f'/library/authors/{author_id}/', author_information)
     return do_put_author
 
+@pytest.fixture
+def delete_author(api_client):
+    def do_delete_author(author_id):
+        return api_client.delete(f'/library/authors/{author_id}/')
+    return do_delete_author
+
 # ! ____________________________Create____________________________
 
 @pytest.mark.django_db
