@@ -12,6 +12,12 @@ def create_genre(api_client):
         return api_client.post('/library/genres/', genre_information)
     return do_create_genre
 
+@pytest.fixture
+def patch_genre(api_client):
+    def do_patch_genre(genre_information, genre_id):
+        return api_client.patch(f'/library/genres/{genre_id}/', genre_information)
+    return do_patch_genre
+
 # ! ____________________________Create____________________________
 
 @pytest.mark.django_db
