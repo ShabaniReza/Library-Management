@@ -92,3 +92,11 @@ class TestPatchGenre:
         response = patch_genre({'name': 'a'}, genre.id)
 
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
+
+    def test_if_user_is_not_admin_returns_403(self, authenticate, patch_genre):
+        genre = baker.make(Genre)
+        authenticate()
+
+        response = patch_genre({'name': 'a'}, genre.id)
+
+        assert response.status_code == status.HTTP_403_FORBIDDEN
