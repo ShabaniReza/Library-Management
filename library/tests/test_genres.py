@@ -81,3 +81,14 @@ class TestListGenre:
         response = api_client.get('/library/genres/')
 
         assert response.status_code == status.HTTP_200_OK
+
+# ! ____________________________Patch____________________________
+
+@pytest.mark.django_db
+class TestPatchGenre:
+    def test_if_user_is_anonymous_returns_401(self, patch_genre):
+        genre = baker.make(Genre)
+
+        response = patch_genre({'name': 'a'}, genre.id)
+
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
