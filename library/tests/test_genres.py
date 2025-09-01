@@ -42,3 +42,18 @@ class TestCreateGenre:
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data['name'] is not None
+
+# ! ____________________________Retrieve____________________________
+
+@pytest.mark.django_db
+class TestRetrieveGenre:
+    def test_if_genre_exist_returns_200(self, api_client):
+        genre = baker.make(Genre)
+
+        response = api_client.get(f'/library/genres/{genre.id}/')
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == {
+            'id': genre.id,
+            'name': genre.name
+        }
