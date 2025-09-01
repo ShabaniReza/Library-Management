@@ -95,7 +95,7 @@ class TestListAuthor:
     def test_if_authors_exists_returns_200(self, api_client):
         authors = baker.make(Author, _quantity=5)
 
-        response = api_client.get(f'/library/authors/')
+        response = api_client.get('/library/authors/')
 
         assert response.status_code == status.HTTP_200_OK
 
