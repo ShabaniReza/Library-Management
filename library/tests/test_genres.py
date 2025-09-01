@@ -34,3 +34,11 @@ class TestCreateGenre:
         response = create_genre({'name': 'a'})
 
         assert response.status_code == status.HTTP_201_CREATED
+
+    def test_is_data_is_invalid_returns_400(self, authenticate, create_genre):
+        authenticate(True)
+
+        response = create_genre({'name': ''})
+
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.data['name'] is not None
