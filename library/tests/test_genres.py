@@ -57,3 +57,10 @@ class TestRetrieveGenre:
             'id': genre.id,
             'name': genre.name
         }
+
+    def test_if_genre_not_exists_returns_404(self, api_client):
+        id = 9999
+
+        response = api_client.get(f'/library/genres/{id}/')
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
