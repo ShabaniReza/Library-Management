@@ -64,3 +64,14 @@ class TestRetrieveGenre:
         response = api_client.get(f'/library/genres/{id}/')
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
+
+# ! ____________________________List____________________________
+
+@pytest.mark.django_db
+class TestListGenre:
+    def test_if_genre_exists_returns_200(self, api_client):
+        genre = baker.make(Genre, _quantity=5)
+
+        response = api_client.get('/library/genres/')
+
+        assert response.status_code == status.HTTP_200_OK
