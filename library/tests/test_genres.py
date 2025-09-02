@@ -123,3 +123,14 @@ class TestPatchGenre:
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data['name'] is not None
+
+# ! ____________________________Patch____________________________
+
+@pytest.mark.django_db
+class TestPutGenre:
+    def test_if_user_is_anonymous_returns_401(self, put_genre):
+        genre = baker.make(Genre)
+
+        response = put_genre({'name': 'a'}, genre.id)
+
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
