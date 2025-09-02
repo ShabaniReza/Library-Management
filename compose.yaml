@@ -67,7 +67,7 @@ services:
   pytest:
     build: .
     container_name: pytest
-    command: pytest library/tests/test_authors.py
+    command: pytest library/tests/
     networks:
       - mynetwork
     depends_on:
