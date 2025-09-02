@@ -24,6 +24,12 @@ def put_genre(api_client):
         return api_client.put(f'/library/genres/{genre_id}/', genre_information)
     return do_put_genre
 
+@pytest.fixture
+def delete_genre(api_client):
+    def do_delete_genre(genre_id):
+        return api_client.delete(f'/libray/genres/{genre_id}')
+    return do_delete_genre
+
 # ! ____________________________Create____________________________
 
 @pytest.mark.django_db
