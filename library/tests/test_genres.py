@@ -193,3 +193,11 @@ class TestDeleteGenre:
         response = delete_genre(genre.id)
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_if_user_is_admin_returns_204(self, authenticate, delete_genre):
+        genre = baker.make(Genre)
+        authenticate(True)
+
+        response = delete_genre(genre.id)
+
+        assert response.status_code == status.HTTP_204_NO_CONTENT
