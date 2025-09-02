@@ -150,3 +150,12 @@ class TestPutGenre:
         response = put_genre({'name': 'a'}, genre.id)
 
         assert response.status_code == status.HTTP_200_OK
+
+    def test_if_data_is_invalid_returns_400(self, authenticate, put_genre):
+        genre = baker.make(Genre)
+        authenticate(True)
+
+        response = put_genre({'name': ''}, genre.id)
+
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.data['name'] is not None
