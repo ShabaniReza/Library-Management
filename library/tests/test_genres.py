@@ -27,7 +27,7 @@ def put_genre(api_client):
 @pytest.fixture
 def delete_genre(api_client):
     def do_delete_genre(genre_id):
-        return api_client.delete(f'/libray/genres/{genre_id}')
+        return api_client.delete(f'/library/genres/{genre_id}/')
     return do_delete_genre
 
 # ! ____________________________Create____________________________
@@ -174,3 +174,14 @@ class TestPutGenre:
         
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data['name'] is not None
+
+# ! ____________________________Delete____________________________
+
+@pytest.mark.django_db
+class TestDeleteGenre:
+    def test_if_user_is_anonymous_returns_401(self, delete_genre):
+        genre = baker.make(Genre)
+
+        response = delete_genre(genre.id)
+
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
