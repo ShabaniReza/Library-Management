@@ -124,7 +124,7 @@ class TestPatchGenre:
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data['name'] is not None
 
-# ! ____________________________Patch____________________________
+# ! ____________________________Put____________________________
 
 @pytest.mark.django_db
 class TestPutGenre:
@@ -134,3 +134,11 @@ class TestPutGenre:
         response = put_genre({'name': 'a'}, genre.id)
 
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
+
+    def test_if_user_is_not_admin_returns_403(self, authenticate, put_genre):
+        genre = baker.make(Genre)
+        authenticate()
+
+        response = put_genre({'name': 'a'}, genre.id)
+
+        assert response.status_code == status.HTTP_403_FORBIDDEN
