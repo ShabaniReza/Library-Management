@@ -142,3 +142,11 @@ class TestPutGenre:
         response = put_genre({'name': 'a'}, genre.id)
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_if_user_is_admin_returns_200(seld, authenticate, put_genre):
+        genre = baker.make(Genre)
+        authenticate(True)
+
+        response = put_genre({'name': 'a'}, genre.id)
+
+        assert response.status_code == status.HTTP_200_OK
