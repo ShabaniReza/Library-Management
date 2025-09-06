@@ -11,4 +11,4 @@ class AuthorsEndpoint(HttpUser):
     @task(1)
     def view_author(self):
         author_id = randint(1, 20)
-        self.client.get(f'/library/authors/{author_id}', name='View author')
+        self.client.get(f'/library/authors/{author_id}/', name='View an author')
