@@ -41,6 +41,14 @@ class GenreViewSet(ModelViewSet):
     filter_backends = [SearchFilter]
     search_fields = ['name']
 
+    @method_decorator(cache_page(60))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
+    @method_decorator(cache_page(60))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
     def get_permissions(self):
         if self.request.method == 'GET':
             return [AllowAny()]
