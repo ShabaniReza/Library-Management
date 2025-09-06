@@ -61,6 +61,14 @@ class BookViewSet(ModelViewSet):
     pagination_class = DefaultPagination
     search_fields = ['author__first_name', 'author__last_name', 'genres__name', 'title', 'publisher', 'publication_year']
 
+    @method_decorator(cache_page(60))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
+    @method_decorator(cache_page(60))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return SimpleBookSerializer
