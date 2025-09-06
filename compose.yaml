@@ -78,7 +78,7 @@ services:
   locust:
     build: .
     container_name: locust
-    command: locust -f locustfiles/locust_authors.py
+    command: locust -f locustfiles/
     ports:
       - '8089:8089'
     depends_on:
