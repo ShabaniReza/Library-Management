@@ -9,6 +9,9 @@ lib64
 # env
 .env
 
+# static files in static folder
+/static/
+
 #pytest cache
 .pytest_cache
 
