@@ -13,31 +13,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
-from dotenv import load_dotenv
-from django.core.exceptions import ImproperlyConfigured
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
-load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
-
-if not SECRET_KEY:
-    raise ImproperlyConfigured("The SECRET_KEY environment variable is not set. Please set it in your .env file or environment.")
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 X_FRAME_OPTIONS = 'DENY'
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
 
 # Application definition
 
@@ -91,21 +74,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'libmanagement.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'librarymanagement',
-        'HOST': 'mysql',
-        'USER': 'root',
-        'PASSWORD': 'your password',
-        'PORT': '3306'
-    }
-}
 
 
 # Password validation
