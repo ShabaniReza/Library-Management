@@ -17,6 +17,7 @@ ConfigArgParse==1.7.1
 coverage==7.10.3
 cryptography==45.0.3
 defusedxml==0.7.1
+dj-database-url==3.0.1
 Django==5.2.1
 django-cors-headers==4.7.0
 django-filter==25.1
