@@ -6,7 +6,7 @@ load_dotenv()
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['reza27.pythonanywhere.com']
 
 REDIS_URL = os.getenv('REDIS_URL')
 
