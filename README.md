@@ -28,6 +28,9 @@ This project implements a comprehensive online library management system using D
     * Django REST Framework (DRF)
     * Django-filter
     * Djoser
+    * Redis(Cache Backend, Message broker)
+    * pytest
+    * Locust(Performance testing)
 * **Database:**
     * MySQL (using `mysqlclient`)
     * SQL
