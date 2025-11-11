@@ -45,7 +45,7 @@ Follow these steps to get your project up and running:
 1.  **Clone the Repository:**
     ```bash
     git clone https://github.com/ShabaniReza/Library-Management.git
-    cd LibraryManagement
+    cd Library-Management
     ```
 
 3.  **Launch with Docker Compose:**
