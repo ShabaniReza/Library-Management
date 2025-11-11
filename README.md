@@ -29,6 +29,7 @@ This project implements a comprehensive online library management system using D
     * Django-filter
     * Djoser
     * Redis(Cache Backend, Message broker)
+    * smtp4dev(Email Backend)
     * pytest
     * Locust(Performance testing)
 * **Database:**
@@ -52,12 +53,19 @@ Follow these steps to get your project up and running:
     ```
 
 3.  **Launch with Docker Compose:**
+
+    This project uses MySQL and Redis and smtp4dev images from docker hob . 
+    ! Remember, you have to set up your mysql password in compose file and stage.py file .
+
+    ! In the root folder, create .env file and set up SECRET_KEY in it .
+    ! Remember you have to put the value of the SEKRET_KEY in quotation marks .
+    Then run command bellow :
+
     ```bash
     docker-compose up
     ```
-    This command builds and runs the Django and MySQL containers. It might take some time for the first build.
+    This command builds and runs the Django, MySQL, smtp4dev and redis containers and also three more container for celery, pytest and locust . It might take some time .
 
-    This project uses MySQL image from docker hub . you have to setting up your MySQL image .
 
 4.  **Project is Ready!**
     * **Django Admin Panel:** Access it at `http://localhost:8000/admin/`
