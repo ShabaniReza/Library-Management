@@ -2,6 +2,11 @@ from .common import *
 
 DEBUG = True
 
+DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASES = {
+    'default': dj_database_url.parse(DATABASE_URL)
+}
+
 CELERY_BROKER_URL = 'redis://localhost:6379/1'
 
 
