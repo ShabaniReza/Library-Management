@@ -59,14 +59,6 @@ Follow these steps to get your project up and running:
 
     This project uses MySQL image from docker hub . you have to setting up your MySQL image .
 
-    There are a SQL file in this project that contain a series of commands to populate your database. If you want to use it, you must follow the steps below (after your containers came up):
-    ```bash
-    docker exec -it (container name) bash
-    cd docker-entrypoint-initdb.d
-    mysql -u root -p < library.sql
-    ```
-    Then enter your mysql password
-
 4.  **Project is Ready!**
     * **Django Admin Panel:** Access it at `http://localhost:8000/admin/`
     * **API Browsable Interface:** Explore the API at `http://localhost:8000/library/`
