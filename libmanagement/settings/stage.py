@@ -1,18 +1,14 @@
 from .common import *
 
+DEBUG = True
 
-DEBUG = False
+CELERY_BROKER_URL = 'redis://redis:6379/1'
 
-ALLOWED_HOSTS = ['reza27.pythonanywhere.com']
-
-REDIS_URL = os.getenv('REDIS_URL')
-
-CELERY_BROKER_URL = REDIS_URL
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": REDIS_URL,
+        "LOCATION": "redis://redis:6379/2",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
