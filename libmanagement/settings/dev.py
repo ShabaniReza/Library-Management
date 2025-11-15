@@ -19,3 +19,5 @@ CACHES = {
         }
     }
 }
+
+CSP_REPORT_ONLY = True
