@@ -1,6 +1,8 @@
-from django.urls import path
 from . import views
 
-urlpatterns = [
-    path('csp-reports/', views.csp_report_view, name='csp_reports'),
-]
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('csp-reports', views.CspReportViewSet)
+
+urlpatterns = router.urls
