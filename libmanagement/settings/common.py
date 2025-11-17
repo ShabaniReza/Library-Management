@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'emails',
     'users',
     'core',
+    'csp_reports',
 ]
 
 MIDDLEWARE = [
