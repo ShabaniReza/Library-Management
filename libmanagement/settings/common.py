@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_rest_passwordreset',
     'djoser',
+    'axes',
     'library',
     'emails',
     'users',
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'axes.middleware.AxesMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -180,4 +182,26 @@ DJANGO_REST_PASSWORDRESET_NO_INFORMATION_LEAKAGE = False
 DJANGO_REST_MULTITOKENAUTH_REQUIRE_USABLE_PASSWORD = True
 DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
     "CLASS": "django_rest_passwordreset.tokens.RandomStringTokenGenerator"
+}
+
+
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 30
+AXES_ONLY_USER_LOGIN_FAILURE_LIMIT = True
+AXES_ENABLE_ACCESS_FAILURE_LOG = True
+AXES_RESET_ON_SUCCESS = True
+
+AXES_ENABLED_ACTIONS = {
+    'default': [
+        (
+            'POST', 
+            'djoser.views.TokenObtainPairView' 
+        )
+    ],
+    'password_reset_confirm': [
+        (
+            'POST',
+            'djoser.views.UserViewSet' 
+        )
+    ]
 }
